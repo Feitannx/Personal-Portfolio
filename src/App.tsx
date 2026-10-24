@@ -24,8 +24,26 @@ function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
 
+  // Change the displayed section and scroll back to the top.
+  const handleSectionChange = (id: SectionId) => {
+    setActiveSection(id);
+
+    // Allow the browser to process the section change before scrolling.
+    window.requestAnimationFrame(() => {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    });
+  };
+
   const sections = {
-    home: <Home onNavigate={setActiveSection} />,
+    home: <Home onNavigate={handleSectionChange} />,
     about: <About />,
     skills: <Skills />,
     projects: <Projects />,
@@ -41,7 +59,7 @@ function App() {
     >
       <Sidebar
         activeSection={activeSection}
-        onSectionChange={setActiveSection}
+        onSectionChange={handleSectionChange}
         isCollapsed={isSidebarCollapsed}
         onToggle={() => setIsSidebarCollapsed((previous) => !previous)}
       />
@@ -50,7 +68,7 @@ function App() {
         {sections[activeSection]}
 
         <Footer
-          onSectionChange={setActiveSection}
+          onSectionChange={handleSectionChange}
           onOpenPrivacyPolicy={() => setIsPrivacyPolicyOpen(true)}
         />
       </main>
