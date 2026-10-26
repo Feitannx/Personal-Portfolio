@@ -1,6 +1,6 @@
 import "./Footer.css";
 import type { SectionId } from "../../App";
-import myLogo from "../../assets/trans-logo.png";
+import myLogo from "../../assets/logo/trans-logo.png";
 
 type FooterProps = {
   onSectionChange?: (id: SectionId) => void;

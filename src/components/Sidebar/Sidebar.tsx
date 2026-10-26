@@ -1,6 +1,7 @@
 import "./Sidebar.css";
 import type { SectionId } from "../../App";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo/logo.png";
+import resume from "../../assets/resume/JERONE NALING.pdf";
 
 const navigation: {
   label: string;
@@ -91,6 +92,23 @@ function Sidebar({
           </a>
         ))}
       </nav>
+
+      {/* Resume Download */}
+      <a
+        href={resume}
+        download="JERONE NALING.pdf"
+        className="sidebar-resume"
+        title={isCollapsed ? "Download Resume" : undefined}
+        aria-label="Download Resume"
+      >
+        <span className="sidebar-resume-icon" aria-hidden="true">
+          ↓
+        </span>
+
+        {!isCollapsed && (
+          <span className="sidebar-resume-label">Download Resume</span>
+        )}
+      </a>
 
       {/* Availability Status */}
       <div className="sidebar-bottom" title="Available for opportunities">
